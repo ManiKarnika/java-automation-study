@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 public class AddNewContact extends TestBase {
   @Test
   public void testAddNewContact() throws Exception {
-    openMainPage();
-    initNewEntryPage();
+    app.getNavigationHelper().openMainPage();
+    app.getContactHelper().initNewEntryPage();
     ContactData contact = new ContactData();
 	contact.contactFirstName = "Werty";
 	contact.contactLastName = "Qwerty";
@@ -23,8 +23,8 @@ public class AddNewContact extends TestBase {
 	contact.contactGroup = "tempo";
 	contact.contactSecondAddress = "3556 Alabama St,\nPortland, 97202\nUSA";
 	contact.contactSecondAddressPhone = "+1(503)231-5659";
-	fillContactForm(contact);
-    submitContactForm();
-    gotoHomePage();
+	app.getContactHelper().fillContactForm(app, this, contact);
+    app.getContactHelper().submitContactForm();
+    app.getNavigationHelper().gotoHomePage();
   }
 }

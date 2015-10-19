@@ -7,12 +7,12 @@ public class EmptyGroupCreationTests extends TestBase {
    
   @Test
   public void testEmtyGroupCreation() throws Exception {
-	openMainPage();
-	gotoGroupsPage();
-	initNewGroup();
-	fillGroupForm(new GroupData("", "", ""));
-	submitGroupPage();
-    gotoGroupsPage();
+	app.getNavigationHelper().openMainPage();
+	app.getNavigationHelper().gotoGroupsPage();
+	app.getGroupHelper().initNewGroup();
+	app.getGroupHelper().fillGroupForm(app, this, new GroupData("", "", ""));
+	app.getGroupHelper().submitGroupPage();
+    app.getNavigationHelper().gotoGroupsPage();
   }  
 
 }
