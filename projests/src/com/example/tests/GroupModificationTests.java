@@ -2,8 +2,6 @@ package com.example.tests;
 
 import org.testng.annotations.Test;
 
-import com.example.fw.ApplicationManager;
-
 public class GroupModificationTests extends TestBase {
 	
 	@Test
@@ -13,7 +11,7 @@ public class GroupModificationTests extends TestBase {
 		app.getGroupHelper().initGroupMopdification(1);
 		GroupData group = new GroupData();
 		group.groupName = "new name";
-		app.getGroupHelper().fillGroupForm(null, null, group); 
+		app.getGroupHelper().fillGroupForm(group); 
 		app.getGroupHelper().submitGroupMopdification();
 		app.getNavigationHelper().gotoGroupsPage();
 	}

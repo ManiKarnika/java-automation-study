@@ -3,7 +3,6 @@ package com.example.fw;
 import org.openqa.selenium.By;
 
 import com.example.tests.ContactData;
-import com.example.tests.TestBase;
 
 public class ContactHelper extends HelperBase {
 
@@ -15,7 +14,7 @@ public class ContactHelper extends HelperBase {
 		click(By.name("submit"));
 	}
 
-	public void fillContactForm(ApplicationManager applicationManager, TestBase testBase, ContactData contact) {
+	public void fillContactForm(ContactData contact) {
 		type(By.name("firstname"), contact.contactFirstName);
 		type(By.name("lastname"), contact.contactLastName);
 	    type(By.name("address"), contact.contactFistAddress);
@@ -30,10 +29,6 @@ public class ContactHelper extends HelperBase {
 	    // selectByText(By.name("new_group"), contact.contactGroup);
 	    type(By.name("address2"), contact.contactSecondAddress);
 	    type(By.name("phone2"), contact.contactSecondAddressPhone);
-	}
-
-	public void initNewEntryPage() {
-		click(By.name("add new"));
 	}
 
 }

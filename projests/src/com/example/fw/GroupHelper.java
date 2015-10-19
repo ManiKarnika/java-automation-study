@@ -3,7 +3,6 @@ package com.example.fw;
 import org.openqa.selenium.By;
 
 import com.example.tests.GroupData;
-import com.example.tests.TestBase;
 
 public class GroupHelper extends HelperBase {
 
@@ -15,7 +14,7 @@ public class GroupHelper extends HelperBase {
 	    click(By.name("submit"));
 	}
 
-	public void fillGroupForm(ApplicationManager applicationManager, TestBase testBase, GroupData group) {
+	public void fillGroupForm(GroupData group) {
 	    type(By.name("group_name"), group.groupName);
 	    type(By.name("group_header"), group.groupHeader);
 	    type(By.name("group_footer"), group.groupFooter);
