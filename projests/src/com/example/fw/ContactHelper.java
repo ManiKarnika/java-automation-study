@@ -1,6 +1,10 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.example.tests.ContactData;
 
@@ -32,7 +36,7 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public void deleteContact(int index) {
-		selectContactByIndex(index);
+		selectContactByIndex(index+1);
 		click(By.xpath("(//input[@name='update'])[2]"));
 	}
 	
@@ -41,7 +45,7 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public void initContactModification(int index) {
-		selectContactByIndex(index);
+		selectContactByIndex(index+1);
 		
 	}
 
@@ -49,5 +53,25 @@ public class ContactHelper extends HelperBase {
 		click(By.xpath("(//input[@name='update'])[1]"));
 		
 	}
+
+	public List<ContactData> getContacts() {
+		List<ContactData> contacts = new ArrayList<ContactData>();
+		List<WebElement> checkboxes = driver.findElements(By.xpath("//tr[@name='entry']"));
+		for (WebElement checkbox : checkboxes) {		
+			ContactData contact = new ContactData();
+			WebElement cell = (checkbox.findElements(By.tagName("td"))).get(2);
+			contact.contactFirstName = cell.getText();
+			cell = (checkbox.findElements(By.tagName("td"))).get(1);
+			contact.contactLastName = cell.getText();
+			cell = (checkbox.findElements(By.tagName("td"))).get(3);
+			contact.contactFirstEmail = cell.getText();
+			contacts.add(contact); // First, Last names & first email only, but it's possible to add another elements..
+		}
+		return contacts;
+		
+		
+	}
+	
+	
 
 }

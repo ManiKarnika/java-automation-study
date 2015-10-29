@@ -1,30 +1,38 @@
 
 package com.example.tests;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Collections;
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 public class AddNewContact extends TestBase {
-  @Test
-  public void testAddNewContact() throws Exception {
+
+  
+	
+  @Test(dataProvider = "randomValidContactsGenerator")
+  public void testAddNewContactWithValidData(ContactData contact) throws Exception {
     app.getNavigationHelper().openMainPage();
+    
+    //save state
+    List<ContactData> oldList = app.getContactHelper().getContacts();
+    
+    //actions
     app.getNavigationHelper().initNewEntryPage();
-    ContactData contact = new ContactData();
-	contact.contactFirstName = "Werty";
-	contact.contactLastName = "Qwerty";
-	contact.contactFistAddress = "3555 Alabama St,\nPortland, 97202\nUSA";
-	contact.contactHomePhone = "+1(503)231-5657";
-	contact.contactMobilePhone = "+1(503)231-5658";
-	contact.contactWorkPhone = "+1(503)231-5659";
-	contact.contactFirstEmail = "sc@sc.com";
-	contact.contactSecondEmail = "sc1@sc.com";
-	contact.contactBirthDay = "1";
-	contact.contactBirthMonth = "January";
-	contact.contactBirthYear = "1980";
-	contact.contactGroup = "tempo";
-	contact.contactSecondAddress = "3556 Alabama St,\nPortland, 97202\nUSA";
-	contact.contactSecondAddressPhone = "+1(503)231-5659";
 	app.getContactHelper().fillContactForm(contact);
     app.getContactHelper().submitContactForm();
     app.getNavigationHelper().gotoHomePage();
+    
+    //save new state 
+    List<ContactData> newList = app.getContactHelper().getContacts();
+    
+    // compare states
+    oldList.add(contact);
+    Collections.sort(oldList);
+    assertEquals(newList, oldList);
+    
   }
+  
 }

@@ -17,6 +17,8 @@ public class GroupData implements Comparable<GroupData> {
 
 
 
+
+
 	@Override
 	public String toString() {
 		return "GroupData [groupName=" + groupName + ", groupHeader=" + groupHeader + ", groupFooter=" + groupFooter
@@ -25,7 +27,7 @@ public class GroupData implements Comparable<GroupData> {
 
 	@Override
 	public int hashCode() { // only hashCode check for logic operations
-		final int prime = 31;
+		//final int prime = 31;
 		int result = 1;
 		//result = prime * result + ((groupName == null) ? 0 : groupName.hashCode());
 		// hashCode was disabled for equals operation
