@@ -1,5 +1,6 @@
 package com.example.tests;
 
+import static com.example.fw.ContactHelper.MODIFICATION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Collections;
@@ -12,7 +13,7 @@ public class ContactModificationTest extends TestBase {
 	
 	@Test(dataProvider = "randomValidContactsGenerator")
 	public void modifySomeContact(ContactData contact) {
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		
 	    //save state
 	    List<ContactData> oldList = app.getContactHelper().getContacts();
@@ -22,9 +23,9 @@ public class ContactModificationTest extends TestBase {
 	    
 	    //actions		
 		app.getContactHelper().initContactModification(index);
-		app.getContactHelper().fillContactForm(contact);
+		app.getContactHelper().fillContactForm(contact, MODIFICATION);
 		app.getContactHelper().submitContactModification();
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		
 	    //save new state 
 	    List<ContactData> newList = app.getContactHelper().getContacts();

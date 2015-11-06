@@ -9,7 +9,10 @@ import org.openqa.selenium.WebElement;
 import com.example.tests.ContactData;
 
 public class ContactHelper extends HelperBase {
-
+	
+	public static boolean CREATION = true;
+	public static boolean MODIFICATION = false;
+	
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
 	}
@@ -18,7 +21,7 @@ public class ContactHelper extends HelperBase {
 		click(By.name("submit"));
 	}
 
-	public void fillContactForm(ContactData contact) {
+	public void fillContactForm(ContactData contact, boolean formType) {
 		type(By.name("firstname"), contact.contactFirstName);
 		type(By.name("lastname"), contact.contactLastName);
 	    type(By.name("address"), contact.contactFistAddress);
@@ -33,6 +36,13 @@ public class ContactHelper extends HelperBase {
 	    // selectByText(By.name("new_group"), contact.contactGroup);
 	    type(By.name("address2"), contact.contactSecondAddress);
 	    type(By.name("phone2"), contact.contactSecondAddressPhone);
+	    if (formType == CREATION) {
+	    	 selectByText(By.name("new_group"), "group 1");
+		} else {
+			if (driver.findElements(By.name("new_group")).size() != 0) {
+				throw new Error("Group selector exists in contact modification form");
+			}
+		}
 	}
 
 	public void deleteContact(int index) {
@@ -56,14 +66,14 @@ public class ContactHelper extends HelperBase {
 
 	public List<ContactData> getContacts() {
 		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> checkboxes = driver.findElements(By.xpath("//tr[@name='entry']"));
-		for (WebElement checkbox : checkboxes) {		
+		List<WebElement> rows = driver.findElements(By.xpath("//tr[@name='entry']"));
+		for (WebElement row : rows) {		
 			ContactData contact = new ContactData();
-			WebElement cell = (checkbox.findElements(By.tagName("td"))).get(2);
+			WebElement cell = (row.findElements(By.tagName("td"))).get(2);
 			contact.contactFirstName = cell.getText();
-			cell = (checkbox.findElements(By.tagName("td"))).get(1);
+			cell = (row.findElements(By.tagName("td"))).get(1);
 			contact.contactLastName = cell.getText();
-			cell = (checkbox.findElements(By.tagName("td"))).get(3);
+			cell = (row.findElements(By.tagName("td"))).get(3);
 			contact.contactFirstEmail = cell.getText();
 			contacts.add(contact); // First, Last names & first email only, but it's possible to add another elements..
 		}

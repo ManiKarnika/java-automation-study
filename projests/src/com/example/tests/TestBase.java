@@ -32,10 +32,10 @@ public class TestBase {
 	  public Iterator<Object[]> randomValidGroupGenerator() {
 		  List<Object[]> list = new ArrayList<Object[]>();
 		  for(int i = 0; i < 5; i++) {
-			   GroupData group = new GroupData();
-			   group.groupName = generateRandomString();
-			   group.groupHeader = generateRandomString();
-			   group.groupFooter = generateRandomString();
+			   GroupData group = new GroupData()
+					   .withName(generateRandomString())
+					   .withHeader(generateRandomString())
+					   .withFooter(generateRandomString()); 
 			   list.add(new Object[] {group});
 		  }
 		  return list.iterator();	  
@@ -87,17 +87,17 @@ public class TestBase {
 	  
 	  public String generateRandomPhoneNumber() {
 		  return "+" + RandomStringUtils.randomNumeric(1) + "(" + RandomStringUtils.randomNumeric(3) + ")" 
-				  		+ RandomStringUtils.randomNumeric(6);
+				  		+ RandomStringUtils.randomNumeric(7);
 	  }
 	  
 	  public String generateRandomEmail() {
-		  return RandomStringUtils.randomAlphabetic(5) + "@" + RandomStringUtils.randomAlphabetic(5) 
-		  				+ "." + RandomStringUtils.randomAlphabetic(3);
+		  return (RandomStringUtils.randomAlphabetic(5) + "@" + RandomStringUtils.randomAlphabetic(5) 
+		  				+ "." + RandomStringUtils.randomAlphabetic(3)).toLowerCase();
 	  }
 	  
 	  public String generateRandomAddress() {
-		  return RandomStringUtils.randomAlphabetic(5) + "\n" + RandomStringUtils.randomAlphabetic(5) 
-		  				+ "\n" + RandomStringUtils.randomAlphabetic(3);
+		  return (RandomStringUtils.randomAlphabetic(5) + "\n" + RandomStringUtils.randomAlphabetic(5) 
+		  				+ "\n" + RandomStringUtils.randomAlphabetic(3)).toLowerCase();
 	  }
 
 }

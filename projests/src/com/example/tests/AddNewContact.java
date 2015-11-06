@@ -1,6 +1,7 @@
 
 package com.example.tests;
 
+import static com.example.fw.ContactHelper.CREATION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Collections;
@@ -14,16 +15,17 @@ public class AddNewContact extends TestBase {
 	
   @Test(dataProvider = "randomValidContactsGenerator")
   public void testAddNewContactWithValidData(ContactData contact) throws Exception {
-    app.getNavigationHelper().openMainPage();
+	  
+    app.navigateTo().mainPage();
     
     //save state
     List<ContactData> oldList = app.getContactHelper().getContacts();
     
     //actions
-    app.getNavigationHelper().initNewEntryPage();
-	app.getContactHelper().fillContactForm(contact);
+    app.navigateTo().initNewEntryPage();
+	app.getContactHelper().fillContactForm(contact, CREATION);
     app.getContactHelper().submitContactForm();
-    app.getNavigationHelper().gotoHomePage();
+    app.navigateTo().gotoHomePage();
     
     //save new state 
     List<ContactData> newList = app.getContactHelper().getContacts();
